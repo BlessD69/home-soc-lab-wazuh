@@ -81,9 +81,10 @@ Similar pattern — the Manager stage failed after a long run, while the Indexer
 ## Screenshots
 
 ![Wazuh Dashboard Login](../screenshots/phase2/dashboard-login.png)
+
 ![Installation Summary](../screenshots/phase2/install-summary.png)
 
-*(Add redacted screenshots here — dashboard login screen and the Overview page. Do not include screenshots showing the plaintext admin password.)*
+!*(Add redacted screenshots here — dashboard login screen and the Overview page. Do not include screenshots showing the plaintext admin password.)*
 
 ## Next Phase
 
