@@ -9,7 +9,6 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 - VMware Workstation Pro
 - Ubuntu Server ISO (26.04 LTS) https://ubuntu.com/download/server
 - Host machine with at least 16GB RAM (to comfortably run multiple VMs)
-
 ![Installation Summary](../screenshots/phase2/download-page.png)
 
 ## Environment Setup
@@ -18,7 +17,7 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 - **Allocated resources:** 4GB RAM, 2 CPU cores, 50GB disk
 - **Network mode:** NAT
 - **OS:** Ubuntu Server 26.04 LTS, with OpenSSH server installed during setup for remote administration
-
+![Installation Summary](../screenshots/phase2/ubuntuInstall.webp)
 ![Installation Summary](../screenshots/phase2/sshInstall.webp)
 
 ## Installation Steps
