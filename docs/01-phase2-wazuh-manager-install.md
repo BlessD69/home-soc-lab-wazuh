@@ -19,7 +19,7 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 - **Network mode:** NAT
 - **OS:** Ubuntu Server 26.04 LTS, with OpenSSH server installed during setup for remote administration
 
-![Installation Summary](../screenshots/phase2/sshInstall.png)
+![Installation Summary](../screenshots/phase2/sshInstall.webp)
 
 ## Installation Steps
 
