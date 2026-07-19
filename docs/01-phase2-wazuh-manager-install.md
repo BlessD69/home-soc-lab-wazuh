@@ -75,10 +75,13 @@ Similar pattern — the Manager stage failed after a long run, while the Indexer
 ## Result
 
 - Wazuh Manager, Indexer, and Dashboard all installed and running
-- Dashboard accessible at `https://192.168.214.134` and logging in successfully with admin credentials
+- Dashboard accessible at `https://<my ip address>` and logging in successfully with admin credentials
 - Confirmed via the dashboard's "Agents Summary" panel showing zero connected agents (expected, since no agents have been deployed yet)
 
 ## Screenshots
+
+![Wazuh Dashboard Login](../screenshots/phase2/dashboard-login.png)
+![Installation Summary](../screenshots/phase2/install-summary.png)
 
 *(Add redacted screenshots here — dashboard login screen and the Overview page. Do not include screenshots showing the plaintext admin password.)*
 
