@@ -9,6 +9,7 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 - VMware Workstation Pro
 - Ubuntu Server ISO (26.04 LTS) https://ubuntu.com/download/server
 - Host machine with at least 16GB RAM (to comfortably run multiple VMs)
+
 ![Installation Summary](../screenshots/phase2/download-page.png)
 
 ## Environment Setup
@@ -17,6 +18,7 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 - **Allocated resources:** 4GB RAM, 2 CPU cores, 50GB disk
 - **Network mode:** NAT
 - **OS:** Ubuntu Server 26.04 LTS, with OpenSSH server installed during setup for remote administration
+
 ![Installation Summary](../screenshots/phase2/ubuntuInstall.webp)
 
 ![Installation Summary](../screenshots/phase2/sshInstall.webp)
@@ -33,33 +35,45 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
    ```bash
    sudo apt update && sudo apt upgrade -y
    ```
+   ![Installation Summary](../screenshots/phase2/updatingUbuntu.webp)
+
 5. Downloaded and ran the official Wazuh all-in-one installer:
    ```bash
    curl -sO https://packages.wazuh.com/4.9/wazuh-install.sh
    sudo bash ./wazuh-install.sh -a
    ```
+   ![Installation Summary](../screenshots/phase2/allinonewazuh.webp)
+   <!-- What the -i flag does: Tells the installer to ignore the recommended hardware/OS checks and proceed anyway. -->
+
+
 6. On completion, retrieved the auto-generated dashboard admin credentials from the installer's summary output
 7. Logged into the Wazuh Dashboard at `https://<wazuh-manager-ip>` to confirm the deployment
 
+![Installation Summary](../screenshots/phase2/wazuhlogin.png)
+
 ## Challenges & Troubleshooting
 
-Real installs rarely go perfectly on the first try — here's what actually happened and how I resolved it:
+Real installs rarely go perfectly on the first try. So here's what actually happened and how I resolved it:
 
 **1. Leftover `cdrom` APT source causing update errors**
 After a fresh install, `apt update` threw a repository error referencing the installation disc. Found the source of the issue with:
 ```bash
 grep -r "cdrom" /etc/apt/sources.list.d/ /etc/apt/sources.list
 ```
+![Wazuh Dashboard Login](../screenshots/phase2/cdromError.webp)
+
 Resolved by removing the stale source file:
 ```bash
 sudo rm /etc/apt/sources.list.d/cdrom.sources
 ```
+![Wazuh Dashboard Login](../screenshots/phase2/stalesourceError.webp)
 
 **2. Hardware requirements check failing**
 The Wazuh installer flagged that my VM didn't meet its recommended minimum specs, even though it was allocated 4GB RAM / 2 cores. Bypassed the check (safe for a lab environment) using the `-i` flag:
 ```bash
 sudo bash ./wazuh-install.sh -a -i
 ```
+![Installation Summary](../screenshots/phase2/install-summary.png)
 
 **3. Wazuh Indexer installation failed on first attempt**
 The installer failed partway through the Indexer setup stage after a long run time, with no detailed error in the main install log. Investigated using:
@@ -73,6 +87,11 @@ Ruled out memory, disk space, and the common `vm.max_map_count` misconfiguration
 
 **4. Wazuh Manager installation failed on a subsequent attempt**
 Similar pattern — the Manager stage failed after a long run, while the Indexer stage (already fixed) succeeded consistently. Applied the same fix: re-ran the full installer. The Manager stage completed successfully on retry.
+## Screenshot
+
+![Wazuh Dashboard Login](../screenshots/phase2/indexerfail.webp)
+
+![Wazuh Dashboard Login](../screenshots/phase2/wazuhmanagerfail.webp)
 
 **Key takeaway:** Rather than immediately assuming a configuration or resource problem, I used service logs, `journalctl`, and system resource checks to rule out the likely causes methodically before concluding the failures were transient network issues — then verified that conclusion by observing consistently faster, successful completions on retry.
 
@@ -82,12 +101,8 @@ Similar pattern — the Manager stage failed after a long run, while the Indexer
 - Dashboard accessible at `https://<my ip address>` and logging in successfully with admin credentials
 - Confirmed via the dashboard's "Agents Summary" panel showing zero connected agents (expected, since no agents have been deployed yet)
 
-## Screenshots
-
 ![Wazuh Dashboard Login](../screenshots/phase2/dashboard-login.png)
-![Installation Summary](../screenshots/phase2/install-summary.png)
 
-<!-- *(Add redacted screenshots here — dashboard login screen and the Overview page. Do not include screenshots showing the plaintext admin password.)* -->
 
 ## Next Phase
 
