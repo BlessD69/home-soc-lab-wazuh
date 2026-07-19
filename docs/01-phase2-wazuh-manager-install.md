@@ -7,8 +7,10 @@ Deploy a fully working Wazuh Manager (Indexer + Manager + Dashboard) on Ubuntu S
 ## Prerequisites
 
 - VMware Workstation Pro
-- Ubuntu Server ISO (26.04 LTS)
+- Ubuntu Server ISO (26.04 LTS) https://ubuntu.com/download/server
 - Host machine with at least 16GB RAM (to comfortably run multiple VMs)
+
+![Installation Summary](../screenshots/phase2/download-page.png)
 
 ## Environment Setup
 
