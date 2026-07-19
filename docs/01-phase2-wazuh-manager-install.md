@@ -87,7 +87,7 @@ Ruled out memory, disk space, and the common `vm.max_map_count` misconfiguration
 
 **4. Wazuh Manager installation failed on a subsequent attempt**
 Similar pattern — the Manager stage failed after a long run, while the Indexer stage (already fixed) succeeded consistently. Applied the same fix: re-ran the full installer. The Manager stage completed successfully on retry.
-## Screenshot
+## Screenshots indexer and manager installation failure
 
 ![Wazuh Dashboard Login](../screenshots/phase2/indexerfail.webp)
 
