@@ -41,9 +41,9 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
 |---|---|
 | Agent ID | 001 |
 | Name | ubuntu-target |
-| IP | 192.168.***.*** |
+| IP | 192.168.xxx.xxx |
 | OS | Ubuntu 26.04 LTS |
-| Status | ● active |
+| Status | ✅ active |
 
 The lab now has its first genuinely monitored endpoint, with logs and system activity flowing into the Wazuh Manager for analysis.
 
