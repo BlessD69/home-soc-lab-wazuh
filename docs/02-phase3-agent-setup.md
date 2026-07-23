@@ -2,7 +2,7 @@
 
 ## What I Built
 
-A second Ubuntu Server VM (`ubuntu-target`) configured as a monitored endpoint, with the Wazuh Agent installed and connected back to the Wazuh Manager deployed in Phase 2. This is the first "protected machine" in the lab — the point where the SIEM stops being an empty dashboard and starts actually monitoring something.
+A second Ubuntu Server VM (`ubuntu-target`) configured as a monitored endpoint, with the Wazuh Agent installed and connected back to the Wazuh Manager deployed in Phase 2. This is the first "protected machine" in the lab, the point where the SIEM stops being an empty dashboard and starts actually monitoring something.
 
 ## Why This Matters
 
@@ -41,7 +41,7 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
 |---|---|
 | Agent ID | 001 |
 | Name | ubuntu-target |
-| IP | 192.168.214.136 |
+| IP | 192.168.***.*** |
 | OS | Ubuntu 26.04 LTS |
 | Status | ● active |
 
