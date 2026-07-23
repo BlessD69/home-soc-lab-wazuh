@@ -17,7 +17,7 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
 
 ## Steps Taken
 
-1. Provisioned a second Ubuntu Server VM (`ubuntu-target`) — 2GB RAM, 20GB disk, OpenSSH server enabled at install
+1. Provisioned a second Ubuntu Server VM (`ubuntu-target`) — 2GB RAM, 100GB disk, OpenSSH server enabled at install
 2. Confirmed network connectivity to the Wazuh Manager VM with a `ping` test before attempting the agent install
 3. Downloaded the Wazuh Agent `.deb` package and installed it, pointing it at the Wazuh Manager's IP via the `WAZUH_MANAGER` environment variable
 4. Enabled and started the `wazuh-agent` service via `systemctl`
@@ -49,7 +49,6 @@ The lab now has its first genuinely monitored endpoint, with logs and system act
 
 ## Screenshots
 
-*(See `screenshots/phase3/` — credentials redacted)*
 
 - Endpoints Summary dashboard showing `ubuntu-target` as Active
 - Terminal output of `systemctl status wazuh-agent` confirming a healthy, running service
