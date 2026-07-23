@@ -33,6 +33,8 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
   ```
   This confirmed `active (running)` with all key sub-processes healthy — `wazuh-execd`, `wazuh-agentd`, `wazuh-syscheckd`, `wazuh-logcollector`, and `wazuh-modulesd` — after over an hour of uptime, ruling out a stale or flickering connection.
 
+  ![Wazuh Dashboard Login](../screenshots/phase3/statusCheck.webp)
+
 ## Result
 
 `ubuntu-target` is confirmed as a stable, actively reporting Wazuh agent:
@@ -49,7 +51,9 @@ The lab now has its first genuinely monitored endpoint, with logs and system act
 
 ## Screenshots
 
+![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard.webp)
 
+![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard2.webp)
 - Endpoints Summary dashboard showing `ubuntu-target` as Active
 - Terminal output of `systemctl status wazuh-agent` confirming a healthy, running service
 
