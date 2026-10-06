@@ -1,4 +1,4 @@
-# Phase 2 — Wazuh Manager Installation
+# Phase 2 — Wazuh Manager Installations
 
 ## Goal
 
