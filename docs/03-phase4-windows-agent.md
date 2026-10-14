@@ -35,9 +35,9 @@ Most real-world environments are majority Windows. Windows endpoints produce dif
    ```
 7. Confirmed on the dashboard under **Server Management → Endpoints Summary** that both agents showed as active
 
-![Wazuh Dashboard Login](../screenshots/phase3/windows11powershell.png)
+![Wazuh Dashboard Login](../screenshots/phase4/windows11powershell.png)
 
-![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard.png)
+![Wazuh Dashboard Login](../screenshots/phase4/wazuhdashboard.png)
 
 - Endpoints Summary showing both agents active
 - `Get-Service -Name WazuhSvc` showing `Running`
