@@ -68,8 +68,6 @@ The lab now has its first genuinely monitored endpoint, with logs and system act
 
 ## Screenshots
 
-![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard.webp)
-
 ![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard2.jpg)
 - Endpoints Summary dashboard showing `ubuntu-target` as Active
 - Terminal output of `systemctl status wazuh-agent` confirming a healthy, running service
