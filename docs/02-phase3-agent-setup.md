@@ -66,7 +66,7 @@ The next challenge came as a result of changing the IP addresses of the VMs.
 
 The lab now has its first genuinely monitored endpoint, with logs and system activity flowing into the Wazuh Manager for analysis.
 
-## Screenshots
+## Wazuh Dashboard Endpoint summary
 
 ![Wazuh Dashboard Login](../screenshots/phase3/wazuhdashboard2.jpg)
 - Endpoints Summary dashboard showing `ubuntu-target` as Active
