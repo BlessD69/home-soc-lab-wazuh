@@ -55,9 +55,9 @@ I'm developing hands-on skills toward a SOC Analyst role. Rather than relying on
 |---|---|---|
 | [Phase 1 — Planning](docs/01-phase2-wazuh-manager-install.md#prerequisites) | Environment planning, tool selection | ✅ Complete |
 | [Phase 2 — Wazuh Manager Install](docs/01-phase2-wazuh-manager-install.md) | Deployed Wazuh Manager, Indexer, Dashboard on Ubuntu Server | ✅ Complete |
-| [Phase 3 — Ubuntu Agent Setup](docs/02-phase3-agent-setup.md) | Connected first monitored Linux endpoint | ✅ Complete |
-| Phase 4 — Windows Agent | Connect monitored Windows endpoint | Planned |
-| Phase 5 — Attack Simulation | Run attacks from Kali, observe detection in Wazuh | Planned |
+| [Phase 3 — Ubuntu Agent](docs/02-phase3-agent-setup.md) | Connected first monitored Linux endpoint | ✅ Complete |
+| [Phase 4 — Windows Agent](docs/03-phase4-windows-agent.md) | Connected monitored Windows endpoint | ✅ Complete |
+| Phase 5 — Attack Simulation | Run attacks from Kali, observe detection in Wazuh | Next |
 | Phase 6 — Custom Detection Rules | Tune and write custom Wazuh rules | Planned |
 
 ## Key Skills Demonstrated So Far
@@ -66,6 +66,8 @@ I'm developing hands-on skills toward a SOC Analyst role. Rather than relying on
 - SIEM deployment and architecture (Wazuh Indexer, Manager, Dashboard)
 - Troubleshooting failed service installations using systemd, logs, and journalctl
 - Network configuration in a virtualized lab environment
+- Disk capacity troubleshooting: recovering a SIEM after a full disk, resizing a VM disk and extending an LVM volume live
+- Multi-platform endpoint monitoring (Linux and Windows agents reporting to one SIEM)
 
 ## Author
 
