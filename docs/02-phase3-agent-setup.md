@@ -74,4 +74,4 @@ The lab now has its first genuinely monitored endpoint, with logs and system act
 
 ## Next Phase
 
-[Phase 4 — Windows Agent Setup](03-phase4-windows-agent.md) *(coming soon)*
+[Phase 4 — Windows Agent Setup](03-phase4-windows-agent.md)
