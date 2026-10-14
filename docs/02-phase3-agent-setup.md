@@ -36,7 +36,7 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
   ![Wazuh Dashboard Login](../screenshots/phase3/statusCheck.webp)
 
  <!--line 41 to 63 was updated october 14th 2026 because i had issues with the IP of my vm after formatting my system. So i assigned a new IP to the VM-->
-The next challenge came as a result of changing the IP addresses of the VM.
+The next challenge came as a result of changing the IP addresses of the VMs.
 
 **Dashboard timing out from memory pressure.** After adding a Windows 11 target VM, the dashboard failed to load with `timeout of 20000ms exceeded`. All services showed as running, so I checked resources instead of assuming a service fault. `free -h` on the Manager showed only 3.3 GiB total with 1.0 GiB available and swap already in use. An all-in-one Wazuh install (Manager, Indexer, and Dashboard on one VM) needs more headroom than that, and the Indexer's Java process was being starved. The host was also overcommitted: my 16 GB laptop was using about 22 GB of page file with four VMs running. I raised the Manager VM from 4 GB to 6 GB (6144 MB), kept it at 2 vCPUs since the host CPU only has 2 physical cores, and now run only one target VM at a time alongside the Manager. Afterwards, `free -h` showed 5.2 GiB total, 3.0 GiB available, and 0 B swap used, and the dashboard loaded normally with the agent reporting Active.
 
