@@ -36,29 +36,19 @@ A SIEM with no agents reporting to it is just an empty database. Connecting an a
   ![Wazuh Dashboard Login](../screenshots/phase3/statusCheck.webp)
 
  <!--line 41 to 63 was updated october 14th 2026 because i had issues with the IP of my vm after formatting my system. So i assigned a new IP to the VM-->
-This phase came into play after chages was made to the IP of the VM.
+The next challenge came as a result of changing the IP addresses of the VM.
 
-1. **Corrupted `.deb` download.** The first package download was corrupted. I verified the file with `file` and its size before retrying instead of assuming the install process was broken.
+**Dashboard timing out from memory pressure.** After adding a Windows 11 target VM, the dashboard failed to load with `timeout of 20000ms exceeded`. All services showed as running, so I checked resources instead of assuming a service fault. `free -h` on the Manager showed only 3.3 GiB total with 1.0 GiB available and swap already in use. An all-in-one Wazuh install (Manager, Indexer, and Dashboard on one VM) needs more headroom than that, and the Indexer's Java process was being starved. The host was also overcommitted: my 16 GB laptop was using about 22 GB of page file with four VMs running. I raised the Manager VM from 4 GB to 6 GB (6144 MB), kept it at 2 vCPUs since the host CPU only has 2 physical cores, and now run only one target VM at a time alongside the Manager. Afterwards, `free -h` showed 5.2 GiB total, 3.0 GiB available, and 0 B swap used, and the dashboard loaded normally with the agent reporting Active.
+
 ![Wazuh Dashboard Login](../screenshots/phase3/crashedWazuh.webp)
 
-2. **Wazuh Manager disk filled up.** The Manager VM ran out of disk space, which took down both the Wazuh Manager and Indexer services. The dashboard became unreachable. I traced the outage to disk exhaustion rather than a config fault. *(Add: the `df -h` output / what was consuming space.)*
 ![Wazuh Dashboard Login](../screenshots/phase3/lowVMsize.webp)
 
-
-3. **Stale lock file.** After space was freed, a leftover lock file stopped services from starting cleanly. I identified and cleared it, then restarted the services.
 ![Wazuh Dashboard Login](../screenshots/phase3/highVMSize.webp)
 
-
-4. **Resized the VM disk and extended the LVM volume live.** To fix the root cause rather than just free a few MB, I grew the virtual disk in VMware and extended the LVM logical volume and filesystem on the running system, without rebuilding the VM. *(Add: the commands you used, e.g. `lvextend` / `resize2fs`.)*
 ![Wazuh Dashboard Login](../screenshots/phase3/updatedVMSize.png)
 
-5. **Trusting the dashboard.** The agent unexpectedly showed Active from an earlier attempt, so I verified it directly on the endpoint:
-   ```bash
-   sudo systemctl status wazuh-agent
-   ```
-   `active (running)` with `wazuh-execd`, `wazuh-agentd`, `wazuh-syscheckd`, `wazuh-logcollector`, and `wazuh-modulesd` all healthy after 1h 27min.
 ![Wazuh Dashboard Login](../screenshots/phase3/runningWazuh.webp)
-
 
 **Takeaway:** monitoring infrastructure needs monitoring too. A SIEM that silently runs out of disk is a blind SOC, so disk capacity on the Manager is now something I check as more agents report in.
 
