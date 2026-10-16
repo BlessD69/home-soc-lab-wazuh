@@ -19,13 +19,20 @@ A SIEM that silently logs everything but never alerts is no better than no SIEM 
 
 Before running anything, I confirmed:
 - Both VMs reachable (`ping`)
+
 ![Wazuh Dashboard Login](../screenshots/phase5/checkIfKaliCanReachUbuntuTarget.png)
 
+
 - `ubuntu-target` agent showing **active** in Endpoints Summary — an attack against a disconnected agent produces no alerts and would be a wasted test
+
 ![Wazuh Dashboard Login](../screenshots/phase5/ubuntuActive.png)
 
+
 - Wazuh Manager disk space healthy (`df -h /`) — this is what failed in Phase 3, so I check it before any phase that generates extra log volume
+
 ![Wazuh Dashboard Login](../screenshots/phase5/wazuhManagerDiskSpace.png)
+
+
 
 ## Tests Run
 
