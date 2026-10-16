@@ -11,14 +11,14 @@ A SIEM that silently logs everything but never alerts is no better than no SIEM 
 ## Environment
 
 - **Attacker:** Kali Linux VM
-- **Target:** `ubuntu-target` (192.168.xxx.xxx), Wazuh agent from Phase 3
-- **Manager:** `wazuh-manager` (192.168.xxx.xxx)
+- **Target:** `ubuntu-target` (192.168.204.131), Wazuh agent from Phase 3
+- **Manager:** `wazuh-manager` (192.168.204.131)
 - **Windows target powered off for this phase** to free up lab RAM
 
 ## Pre-Checks
 
 Before running anything, I confirmed:
-- Both VMs reachable (`ping`)
+- ubuntu-target VM is reachable (`ping`)
 
 ![Wazuh Dashboard Login](../screenshots/phase5/checkIfKaliCanReachUbuntuTarget.png)
 
@@ -38,16 +38,46 @@ Before running anything, I confirmed:
 
 ### Test 1 — Port Scan (Reconnaissance)
 ```bash
-nmap -sS -sV 192.168.204.131
+nmap -sS -sV 192.168.204.131 (my ubuntu-target vm)
 ```
-**Expected finding:** a plain port scan often produces **little or no alert** from a host-based agent like Wazuh, because the agent sees host activity, not raw network probes hitting the wire. *(Record what you actually saw — if nothing fired, that's a legitimate and useful finding, not a failure: it's the reason SOCs pair host agents with a network sensor like Suricata.)*
+**Expected finding:** a plain port scan often produces **little or no alert** from a host-based agent like Wazuh, because the agent sees host activity, not raw network probes hitting the wire. Although, nothing fired, which is a legitimate and useful finding, not a failure: it's the reason SOCs pair host agents with a network sensor like Suricata.
+
+![Wazuh Dashboard Login](../screenshots/phase5/portscan.png)
+
+
 
 ### Test 2 — SSH Brute-Force
 Manual failed logins, then an automated burst with a short wordlist:
 ```bash
-hydra -l agentadmin -P short.txt ssh://192.168.204.131 -t 4
+![Wazuh Dashboard Login](../screenshots/phase5/singlefailedattempt.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/singlepassedattempt.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/singlepassedattemptNowHasControl.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/wazuhsuccessLogin.png)
+
+
+
+echo -e "password\n123456\nadmin\nletmein\nqwerty" > ~/small-list.txt
+hydra -l agentadmin -P ~/small-list.txt ssh://192.168.204.131 -t 4
+
+hydra -l agentadmin -P /home/kali/passwords.txt ssh://192.168.204.131
+
+![Wazuh Dashboard Login](../screenshots/phase5/bruteforcepass1.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/bruteforcepass2.png)
+
+
 ```
 **Expected finding:** repeated `sshd: authentication failed` alerts in Wazuh, escalating to `sshd: brute force trying to get access to the system` once enough failures land inside the correlation window. Checked each alert's `data.srcip` (should match Kali), `rule.id`, `rule.level`, and the MITRE ATT&CK tag (expected **T1110 — Brute Force**).
+
+![Wazuh Dashboard Login](../screenshots/phase5/threathunting.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/threathunting2.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/threathunting3.png)
+
 
 ### Test 3 — Privilege Use & User Creation
 On `ubuntu-target` directly:
