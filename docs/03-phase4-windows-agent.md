@@ -55,3 +55,4 @@ No active challenge was experienced
 ## Next Phase
 
 Phase 5 — Attack simulation from Kali, observing detection in Wazuh *(coming soon)*
+
