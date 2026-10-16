@@ -74,7 +74,6 @@ hydra -l agentadmin -P /home/kali/passwords.txt ssh://192.168.204.131
 
 ![Wazuh Dashboard Login](../screenshots/phase5/threathunting.png)
 
-![Wazuh Dashboard Login](../screenshots/phase5/threathunting2.png)
 
 ![Wazuh Dashboard Login](../screenshots/phase5/threathunting3.png)
 
@@ -86,33 +85,35 @@ sudo whoami
 sudo useradd labtestuser
 sudo userdel labtestuser
 ```
+
+
+![Wazuh Dashboard Login](../screenshots/phase5/whoami.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/whoami2.png)
+
+
 **Expected finding:** alerts tied to `sudo` usage and user account changes — the kind of activity a SOC watches for as a sign of privilege escalation or persistence.
 
 ## Results
 
-*(Fill in per test: did an alert fire, what rule ID/description, what severity level, and the timestamp match. A short table works well, e.g.)*
+Alerts actually fired
 
-| Test | Alert fired? | Rule / Description | Level | MITRE ATT&CK |
-|---|---|---|---|---|
-| Port scan | | | | |
-| SSH brute-force | | | | |
-| Privilege use / user creation | | | | |
+![Wazuh Dashboard Login](../screenshots/phase5/threathunting2.png)
+
 
 ## Challenges & How I Solved Them
 
-*(Add anything that didn't go as expected — no alert where one was anticipated, a rule that didn't fire until a threshold was crossed, Hydra behaving unexpectedly, etc. The gap between "expected" and "actual" is the most useful part of this phase for a portfolio reader.)*
+One of the most exhusting challenge i encountered was understanding how wazuh dashboard catches the alerts, at first i didn't understand the flow of things but carefully checking the timestamps from my kali (Attack VM) and comparing it with the timestamps on the wazuh reports i was able to understand the flow of things and how it relates to each attack from my kali.
+
+![Wazuh Dashboard Login](../screenshots/phase5/timestamps1.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/timestamps2.png)
+
 
 ## Key Takeaway
 
-Detection coverage isn't uniform. Some attacks (brute-force, privilege use) are caught cleanly out of the box by Wazuh's default rules; others (a plain port scan) may need a network-layer sensor to catch at all. Knowing where the blind spots are is itself a SOC skill — it's what Phase 6 (custom detection rules) will start to close.
+Detection coverage isn't uniform. Some attacks (brute-force, privilege use) are caught cleanly out of the box by Wazuh's default rules; others (a plain port scan) may need a network-layer sensor to catch at all. Knowing where the blind spots are is itself a SOC skill it's what Phase 6 (custom detection rules) will start to close.
 
-## Screenshots
-
-*(See `screenshots/phase5/`, credentials redacted)*
-
-- Threat Hunting / Security Events view showing the brute-force alerts
-- An expanded alert showing `data.srcip`, `rule.id`, and the MITRE tag
-- Terminal output from each attack command for reference
 
 ## Next Phase
 
