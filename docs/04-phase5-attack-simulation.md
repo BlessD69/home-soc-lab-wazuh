@@ -6,21 +6,26 @@ Ran a series of controlled, known attack patterns from my Kali Linux VM against 
 
 ## Why This Matters
 
-A SIEM that silently logs everything but never alerts is no better than no SIEM at all. This phase tests the lab from the attacker's side and the defender's side at once: generate a known malicious pattern, then go find the evidence of it in Wazuh. That loop — attack, then verify detection — is the core of detection engineering and exactly what separates "I installed a SIEM" from "I know how to use one."
+A SIEM that silently logs everything but never alerts is no better than no SIEM at all. This phase tests the lab from the attacker's side and the defender's side at once: generate a known malicious pattern, then go find the evidence of it in Wazuh. That loop attack, then verify detection is the core of detection engineering and exactly what separates "I installed a SIEM" from "I know how to use one."
 
 ## Environment
 
 - **Attacker:** Kali Linux VM
-- **Target:** `ubuntu-target` (192.168.204.131), Wazuh agent from Phase 3
-- **Manager:** `wazuh-manager` (192.168.204.133)
+- **Target:** `ubuntu-target` (192.168.xxx.xxx), Wazuh agent from Phase 3
+- **Manager:** `wazuh-manager` (192.168.xxx.xxx)
 - **Windows target powered off for this phase** to free up lab RAM
 
 ## Pre-Checks
 
 Before running anything, I confirmed:
 - Both VMs reachable (`ping`)
+![Wazuh Dashboard Login](../screenshots/phase5/checkIfKaliCanReachUbuntuTarget.png)
+
 - `ubuntu-target` agent showing **active** in Endpoints Summary — an attack against a disconnected agent produces no alerts and would be a wasted test
+![Wazuh Dashboard Login](../screenshots/phase5/ubuntuActive.png)
+
 - Wazuh Manager disk space healthy (`df -h /`) — this is what failed in Phase 3, so I check it before any phase that generates extra log volume
+![Wazuh Dashboard Login](../screenshots/phase5/wazuhManagerDiskSpace.png)
 
 ## Tests Run
 
