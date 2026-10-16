@@ -57,8 +57,8 @@ I'm developing hands-on skills toward a SOC Analyst role. Rather than relying on
 | [Phase 2 — Wazuh Manager Install](docs/01-phase2-wazuh-manager-install.md) | Deployed Wazuh Manager, Indexer, Dashboard on Ubuntu Server | ✅ Complete |
 | [Phase 3 — Ubuntu Agent](docs/02-phase3-agent-setup.md) | Connected first monitored Linux endpoint | ✅ Complete |
 | [Phase 4 — Windows Agent](docs/03-phase4-windows-agent.md) | Connected monitored Windows endpoint | ✅ Complete |
-| Phase 5 — Attack Simulation | Run attacks from Kali, observe detection in Wazuh | Next |
-| Phase 6 — Custom Detection Rules | Tune and write custom Wazuh rules | Planned |
+| [Phase 5 — Attack Simulation](docs/04-phase5-attack-simulation.md) | Run attacks from Kali, observe detection in Wazuh | ✅ Complete |
+| Phase 6 — Custom Detection Rules | Tune and write custom Wazuh rules | Next |
 
 ## Key Skills Demonstrated So Far
 
