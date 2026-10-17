@@ -20,7 +20,7 @@ A SIEM that silently logs everything but never alerts is no better than no SIEM 
 Before running anything, I confirmed:
 - ubuntu-target VM is reachable (`ping`)
 
-![Wazuh Dashboard Login](../screenshots/phase5/checkIfKaliCanReachUbuntuTarget.png)
+![Wazuh Dashboard Login](../screenshots/phase5/checkIfKaliCanReachUbuntuTar.png)
 
 
 - `ubuntu-target` agent showing **active** in Endpoints Summary — an attack against a disconnected agent produces no alerts and would be a wasted test
