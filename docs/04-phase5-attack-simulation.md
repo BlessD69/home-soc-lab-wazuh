@@ -48,7 +48,7 @@ nmap -sS -sV 192.168.xxx.xxx (my ubuntu-target vm)
 
 ### Test 2 — SSH Brute-Force
 Manual failed logins, then an automated burst with a short wordlist:
-```bash
+
 ![Wazuh Dashboard Login](../screenshots/phase5/singlefailedattempt.png)
 
 ![Wazuh Dashboard Login](../screenshots/phase5/singlepassedattempt.png)
@@ -58,18 +58,19 @@ Manual failed logins, then an automated burst with a short wordlist:
 ![Wazuh Dashboard Login](../screenshots/phase5/wazuhsuccessLogin.png)
 
 
-
+```bash
 echo -e "password\n123456\nadmin\nletmein\nqwerty" > ~/small-list.txt
 hydra -l agentadmin -P ~/small-list.txt ssh://192.168.xxx.xxx -t 4
 
 hydra -l agentadmin -P /home/kali/passwords.txt ssh://192.168.xxx.xxx
+```
 
 ![Wazuh Dashboard Login](../screenshots/phase5/bruteforcepass1.png)
 
 ![Wazuh Dashboard Login](../screenshots/phase5/bruteforcepass2.png)
 
 
-```
+
 **Expected finding:** repeated `sshd: authentication failed` alerts in Wazuh, escalating to `sshd: brute force trying to get access to the system` once enough failures land inside the correlation window. Checked each alert's `data.srcip` (should match Kali), `rule.id`, `rule.level`, and the MITRE ATT&CK tag (expected **T1110 — Brute Force**).
 
 ![Wazuh Dashboard Login](../screenshots/phase5/threathunting.png)
