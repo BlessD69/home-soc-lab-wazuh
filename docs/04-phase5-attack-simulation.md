@@ -11,8 +11,8 @@ A SIEM that silently logs everything but never alerts is no better than no SIEM 
 ## Environment
 
 - **Attacker:** Kali Linux VM
-- **Target:** `ubuntu-target` (192.168.204.131), Wazuh agent from Phase 3
-- **Manager:** `wazuh-manager` (192.168.204.131)
+- **Target:** `ubuntu-target` (192.168.xxx.xxx), Wazuh agent from Phase 3
+- **Manager:** `wazuh-manager` (192.168.xxx.xxx)
 - **Windows target powered off for this phase** to free up lab RAM
 
 ## Pre-Checks
@@ -38,7 +38,7 @@ Before running anything, I confirmed:
 
 ### Test 1 — Port Scan (Reconnaissance)
 ```bash
-nmap -sS -sV 192.168.204.131 (my ubuntu-target vm)
+nmap -sS -sV 192.168.xxx.xxx (my ubuntu-target vm)
 ```
 **Expected finding:** a plain port scan often produces **little or no alert** from a host-based agent like Wazuh, because the agent sees host activity, not raw network probes hitting the wire. Although, nothing fired, which is a legitimate and useful finding, not a failure: it's the reason SOCs pair host agents with a network sensor like Suricata.
 
@@ -60,9 +60,9 @@ Manual failed logins, then an automated burst with a short wordlist:
 
 
 echo -e "password\n123456\nadmin\nletmein\nqwerty" > ~/small-list.txt
-hydra -l agentadmin -P ~/small-list.txt ssh://192.168.204.131 -t 4
+hydra -l agentadmin -P ~/small-list.txt ssh://192.168.xxx.xxx -t 4
 
-hydra -l agentadmin -P /home/kali/passwords.txt ssh://192.168.204.131
+hydra -l agentadmin -P /home/kali/passwords.txt ssh://192.168.xxx.xxx
 
 ![Wazuh Dashboard Login](../screenshots/phase5/bruteforcepass1.png)
 
