@@ -111,6 +111,10 @@ One of the most exhusting challenge i encountered was understanding how wazuh da
 ![Wazuh Dashboard Login](../screenshots/phase5/timestamps2.png)
 
 
+
+
+
+
 ## Now for my Windows Target — RDP Brute-Force Simulation
 
 To confirm the lab's detection works across operating systems, not just Linux, the same style of attack was repeated against `windows-target` over RDP.
