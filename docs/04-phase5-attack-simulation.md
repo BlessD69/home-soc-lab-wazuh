@@ -113,9 +113,7 @@ One of the most exhusting challenge i encountered was understanding how wazuh da
 
 
 
-
-
-## Now for my Windows Target — RDP Brute-Force Simulation
+## Now for my windows-target — RDP Brute-Force Simulation
 
 To confirm the lab's detection works across operating systems, not just Linux, the same style of attack was repeated against `windows-target` over RDP.
 
