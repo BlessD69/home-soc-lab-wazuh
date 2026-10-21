@@ -2,7 +2,7 @@
 
 ## What I Did
 
-Moved beyond Wazuh's default ruleset by writing my own correlation rule for SSH brute-force detection on `ubuntu-target`, then validated and tested it against a real attack from Kali. This is the step that separates "I installed a SIEM" from "I can tune one" — most beginner labs stop at default detections.
+I Moved beyond Wazuh's default ruleset by writing my own correlation rule for SSH brute-force detection on `ubuntu-target`, then validated and tested it against a real attack from Kali. This is the step that separates "I installed a SIEM" from "I can tune one" — most beginner labs stop at default detections.
 
 ## Why This Matters
 
@@ -10,25 +10,29 @@ Default rules are a starting point, not a finished detection strategy. Every rea
 
 ## Environment
 
-- **Wazuh Manager:** 192.168.204.133, local rules file at `/var/ossec/etc/rules/local_rules.xml`
-- **Target:** `ubuntu-target` (192.168.204.131)
+- **Wazuh Manager:** 192.168.xxx.xxx, local rules file at `/var/ossec/etc/rules/local_rules.xml`
+- **Target:** `ubuntu-target` (192.168.xxx.xxx)
 - **Attacker:** Kali Linux VM, `hydra`
 
 ## Steps Taken
 
 1. **Identified the base rule to build on.** Checked the alerts from the Phase 5 Hydra run and found the actual rule firing on failed SSH logins was **rule `5760`** ("sshd: authentication failed").
+
+
 2. **Opened the local rules file** on the Wazuh Manager:
    ```bash
    sudo nano /var/ossec/etc/rules/local_rules.xml
    ```
    This file is empty by default and reserved for custom rules, so manager updates never overwrite it.
+
+
 3. **Wrote a custom correlation rule** that escalates severity when 5+ SSH failures arrive from the same source IP within 120 seconds:
    ```xml
    <group name="local,syslog,sshd,">
      <rule id="100020" level="12" frequency="5" timeframe="120">
        <if_matched_sid>5760</if_matched_sid>
        <same_source_ip />
-       <description>Multiple SSH authentication failures from same source - possible brute force attack</description>
+       <description>(EthicalBlessD1 Test rule) Multiple SSH authentication failures from same source - possible brute force attack</description>
        <mitre>
          <id>T1110</id>
        </mitre>
@@ -36,15 +40,34 @@ Default rules are a starting point, not a finished detection strategy. Every rea
    </group>
    ```
    Used the `100000+` ID range reserved for local/custom rules to avoid colliding with Wazuh's built-in ruleset.
+
+
 4. **Validated the rule's syntax before touching the live manager:**
    ```bash
    sudo /var/ossec/bin/wazuh-logtest
    ```
+
+![Wazuh Dashboard Login](../screenshots/phase5/validatedNewWazuhRule.webp)
+
 5. **Restarted the manager** to load the rule:
    ```bash
    sudo systemctl restart wazuh-manager
    ```
+![Wazuh Dashboard Login](../screenshots/phase5/rulechange2.png)
+
+
 6. **Re-ran the Hydra attack** from Kali and checked the dashboard, searching `rule.id: 100020`, to confirm the custom rule fired on top of the default detections.
+
+![Wazuh Dashboard Login](../screenshots/phase5/hackrulechange1.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/rulechange1.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/gainAccess1.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/gainAccess2.png)
+
+![Wazuh Dashboard Login](../screenshots/phase5/gainAccessWazzuhCatch1.png)
+
 
 ## Challenges & How I Solved Them
 
@@ -54,7 +77,7 @@ Default rules are a starting point, not a finished detection strategy. Every rea
 
 ## Result
 
-*(Confirm from your dashboard and fill in: did `rule.id: 100020` fire on the re-run, at what timestamp relative to the attack, and whether it appeared alongside or instead of the default `5760`/`40112` alerts.)*
+![Wazuh Dashboard Login](../screenshots/phase5/confirmDesc.png)
 
 | Rule | Type | Trigger | Level | MITRE |
 |---|---|---|---|---|
@@ -69,14 +92,5 @@ The successful brute-force exposed a weak password policy on `ubuntu-target`. In
 - Adding login-attempt lockout (e.g. `fail2ban` or Wazuh's active response)
 - Disabling direct password authentication over SSH in favor of key-based auth where possible
 
-## Screenshots
+## All Phases now complete
 
-*(See `screenshots/phase6/`, credentials redacted)*
-
-- `wazuh-logtest` output confirming the corrected rule match
-- Dashboard view showing `rule.id: 100020` firing
-- `local_rules.xml` contents (redact any sensitive paths/IPs you don't want public)
-
-## Next Phase
-
-Phase 7 — *(to be planned: options include extending custom rules to the Windows/RDP side, active response/auto-blocking, or a dashboard build summarizing detections across phases)*
