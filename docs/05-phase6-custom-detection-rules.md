@@ -47,7 +47,7 @@ Default rules are a starting point, not a finished detection strategy. Every rea
    sudo /var/ossec/bin/wazuh-logtest
    ```
 
-![Wazuh Dashboard Login](../screenshots/phase6/validatedNewWazuhRule.webp)
+![Wazuh Dashboard Login](../screenshots/phase6/validatedNewWazuhRule.png)
 
 5. **Restarted the manager** to load the rule:
    ```bash
