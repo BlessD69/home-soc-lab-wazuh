@@ -47,26 +47,26 @@ Default rules are a starting point, not a finished detection strategy. Every rea
    sudo /var/ossec/bin/wazuh-logtest
    ```
 
-![Wazuh Dashboard Login](../screenshots/phase5/validatedNewWazuhRule.webp)
+![Wazuh Dashboard Login](../screenshots/phase6/validatedNewWazuhRule.webp)
 
 5. **Restarted the manager** to load the rule:
    ```bash
    sudo systemctl restart wazuh-manager
    ```
-![Wazuh Dashboard Login](../screenshots/phase5/rulechange2.png)
+![Wazuh Dashboard Login](../screenshots/phase6/rulechange2.png)
 
 
 6. **Re-ran the Hydra attack** from Kali and checked the dashboard, searching `rule.id: 100020`, to confirm the custom rule fired on top of the default detections.
 
-![Wazuh Dashboard Login](../screenshots/phase5/hackrulechange1.png)
+![Wazuh Dashboard Login](../screenshots/phase6/hackrulechange1.png)
 
-![Wazuh Dashboard Login](../screenshots/phase5/rulechange1.png)
+![Wazuh Dashboard Login](../screenshots/phase6/rulechange1.png)
 
-![Wazuh Dashboard Login](../screenshots/phase5/gainAccess1.png)
+![Wazuh Dashboard Login](../screenshots/phase6/gainAccess1.png)
 
-![Wazuh Dashboard Login](../screenshots/phase5/gainAccess2.png)
+![Wazuh Dashboard Login](../screenshots/phase6/gainAccess2.png)
 
-![Wazuh Dashboard Login](../screenshots/phase5/gainAccessWazzuhCatch1.png)
+![Wazuh Dashboard Login](../screenshots/phase6/gainAccessWazzuhCatch1.png)
 
 
 ## Challenges & How I Solved Them
@@ -77,7 +77,7 @@ Default rules are a starting point, not a finished detection strategy. Every rea
 
 ## Result
 
-![Wazuh Dashboard Login](../screenshots/phase5/confirmDesc.png)
+![Wazuh Dashboard Login](../screenshots/phase6/confirmDesc.png)
 
 | Rule | Type | Trigger | Level | MITRE |
 |---|---|---|---|---|
